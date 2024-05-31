@@ -46,6 +46,27 @@ services:
     ports:
       - "8080:8080"
 
+  service-registry:
+    image: diegoda04/service-registry:latest
+    container_name: service-registry
+    restart: always
+
+  tracking-service:
+    image: diegoda04/tracking-service:latest
+    container_name: tracking-service
+    restart: always
+    depends_on:
+      - mysql
+      - rabbitmq
+    environment:
+      DATABASE_CONECTION_STRING: jdbc:mysql://mysql-container:3306/deviceservicedb
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: 12345678
+      RABBITMQ_HOST: rabbitmq-container
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USERNAME: guest
+      RABBITMQ_PASSWORD: guest
+
 volumes:
   mysql-data:
   rabbitmq-data:
