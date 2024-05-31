@@ -19,7 +19,7 @@ public class IotDataConsumer {
   private final TrackingService trackingService;
   private final SimpMessagingTemplate messagingTemplate;
 
-  @RabbitListener(queues = "iot.queue", autoStartup = "false")
+  @RabbitListener(queues = "iot.queue")
   public void handleMessage(String message) throws JsonProcessingException {
     ObjectMapper objectMapper = new ObjectMapper();
     IotData data = objectMapper.readValue(message, IotData.class);
