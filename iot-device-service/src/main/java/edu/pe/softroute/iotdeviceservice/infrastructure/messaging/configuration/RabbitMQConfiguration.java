@@ -50,6 +50,8 @@ public class RabbitMQConfiguration {
 
   @Bean
   public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
-    return new RabbitAdmin(connectionFactory);
+    RabbitAdmin rabbitAdmin = new RabbitAdmin(connectionFactory);
+    rabbitAdmin.setAutoStartup(true);
+    return rabbitAdmin;
   }
 }
