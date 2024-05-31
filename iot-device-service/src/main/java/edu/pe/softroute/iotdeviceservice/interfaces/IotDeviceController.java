@@ -6,8 +6,12 @@ import edu.pe.softroute.iotdeviceservice.infrastructure.messaging.producers.IotD
 import edu.pe.softroute.iotdeviceservice.infrastructure.messaging.producers.dto.IotDataReq;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.core.AmqpAdmin;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/iot-devices")
 @RequiredArgsConstructor
 public class IotDeviceController {
+
 
   private final IotDeviceService iotDeviceService;
 

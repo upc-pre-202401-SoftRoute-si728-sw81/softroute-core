@@ -1,5 +1,6 @@
 package edu.pe.softroute.iotdeviceservice.infrastructure.messaging.configuration;
 
+import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -50,8 +51,6 @@ public class RabbitMQConfiguration {
 
   @Bean
   public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
-    RabbitAdmin rabbitAdmin = new RabbitAdmin(connectionFactory);
-    rabbitAdmin.setAutoStartup(true);
-    return rabbitAdmin;
+    return new RabbitAdmin(connectionFactory);
   }
 }

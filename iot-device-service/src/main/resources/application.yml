@@ -1,17 +1,18 @@
 server:
-    port: 8080
+    port: 8082
 spring:
     application:
         name: iot-device-service
     datasource:
-        url: ${DATABASE_CONECTION_STRING}
-        username: ${DATABASE_USERNAME}
-        password: ${DATABASE_PASSWORD}
+        password: 123456
+        url: jdbc:mysql://localhost:3306/devices
+        username: root
     jpa:
         hibernate:
             ddl-auto: update
     rabbitmq:
-        host: ${RABBITMQ_HOST}
-        username: ${RABBITMQ_USERNAME}
-        password: ${RABBITMQ_PASSWORD}
-        port: ${RABBITMQ_PORT}
+        host: localhost
+        password: guest
+        username: guest
+        virtual-host: /
+        port: 5674
