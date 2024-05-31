@@ -2,6 +2,7 @@ package edu.pe.softroute.trackingservice.infrastructure.messaging.consumer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import edu.pe.softroute.trackingservice.domain.models.entities.Location;
 import edu.pe.softroute.trackingservice.domain.models.entities.Tracking;
 import edu.pe.softroute.trackingservice.domain.services.TrackingService;
@@ -18,10 +19,13 @@ public class IotDataConsumer {
 
   private final TrackingService trackingService;
   private final SimpMessagingTemplate messagingTemplate;
+  private final ObjectMapper objectMapper;
 
   @RabbitListener(queues = "iot.queue")
   public void handleMessage(String message) throws JsonProcessingException {
-    ObjectMapper objectMapper = new ObjectMapper();
+
+    objectMapper.registerModule(new JavaTimeModule());
+
     IotData data = objectMapper.readValue(message, IotData.class);
 
     System.out.println("Received message from queue " + "iot.queue" + ": " + data);
