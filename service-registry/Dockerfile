@@ -1,7 +1,10 @@
 FROM openjdk:17-jdk-alpine
 LABEL authors="diego"
-RUN apk --no-cache add curl
-WORKDIR /app
-COPY target/service-registry-0.0.1-SNAPSHOT.jar ./app.jar
+RUN apk --no-cache add curl maven
 EXPOSE 8761
-ENTRYPOINT ["java", "-jar", "app.jar"]
+WORKDIR /app
+COPY pom.xml .
+RUN mvn dependency:resolve
+COPY src src
+RUN mvn package -DskipTests
+ENTRYPOINT ["java", "-jar", "target/service-registry-0.0.1-SNAPSHOT.jar"]
