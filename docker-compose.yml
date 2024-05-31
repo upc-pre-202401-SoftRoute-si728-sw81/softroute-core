@@ -56,8 +56,7 @@ services:
     container_name: tracking-service
     restart: always
     depends_on:
-      - mysql
-      - rabbitmq
+      - iot-device-service
     environment:
       DATABASE_CONECTION_STRING: jdbc:mysql://mysql-container:3306/deviceservicedb
       DATABASE_USERNAME: root
@@ -66,7 +65,8 @@ services:
       RABBITMQ_PORT: 5672
       RABBITMQ_USERNAME: guest
       RABBITMQ_PASSWORD: guest
-
+    ports:
+      - "8081:8081"
 volumes:
   mysql-data:
   rabbitmq-data:
