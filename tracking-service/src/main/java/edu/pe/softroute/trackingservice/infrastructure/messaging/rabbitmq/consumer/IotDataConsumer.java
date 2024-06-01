@@ -1,4 +1,4 @@
-package edu.pe.softroute.trackingservice.infrastructure.messaging.consumer;
+package edu.pe.softroute.trackingservice.infrastructure.messaging.rabbitmq.consumer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import edu.pe.softroute.trackingservice.domain.models.entities.Location;
 import edu.pe.softroute.trackingservice.domain.models.entities.Tracking;
 import edu.pe.softroute.trackingservice.domain.services.TrackingService;
-import edu.pe.softroute.trackingservice.infrastructure.messaging.consumer.dto.IotData;
+import edu.pe.softroute.trackingservice.infrastructure.messaging.rabbitmq.consumer.dto.IotData;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

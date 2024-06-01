@@ -1,4 +1,4 @@
-package edu.pe.softroute.trackingservice.infrastructure.websockets.configuration;
+package edu.pe.softroute.trackingservice.infrastructure.messaging.websockets.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

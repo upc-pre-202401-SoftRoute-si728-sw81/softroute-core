@@ -1,4 +1,4 @@
-package edu.pe.softroute.trackingservice.infrastructure.messaging.consumer.dto;
+package edu.pe.softroute.trackingservice.infrastructure.messaging.rabbitmq.consumer.dto;
 
 import lombok.Data;
 
