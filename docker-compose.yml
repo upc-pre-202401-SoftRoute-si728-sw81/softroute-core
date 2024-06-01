@@ -29,7 +29,7 @@ services:
       - rabbitmq-data:/var/lib/rabbitmq
 
   iot-device-service:
-    image: diegoda04/iot-device-service:latest
+    build: ./iot-device-service
     container_name: iot-device-service
     restart: always
     depends_on:
@@ -52,7 +52,7 @@ services:
     restart: always
 
   tracking-service:
-    image: diegoda04/tracking-service:latest
+    build: ./tracking-service
     container_name: tracking-service
     restart: always
     depends_on:
