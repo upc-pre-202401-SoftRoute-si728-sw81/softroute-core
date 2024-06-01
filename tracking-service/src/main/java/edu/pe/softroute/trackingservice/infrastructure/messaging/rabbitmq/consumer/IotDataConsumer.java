@@ -35,6 +35,6 @@ public class IotDataConsumer {
     Tracking tracking = trackingService.updateLocationByTrackingNumber(data.getTrackingNumber(), location);
 
     String messageTracking = objectMapper.writeValueAsString(tracking);
-    messagingTemplate.convertAndSend("/topic/tracking" , messageTracking);
+    messagingTemplate.convertAndSend("/topic/tracking/" + tracking.getTrackingNumber() , messageTracking);
   }
 }
