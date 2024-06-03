@@ -11,19 +11,42 @@ services:
       interval: 20s
       timeout: 10s
       retries: 3
+    depends_on:
+      config-service:
+        condition: service_healthy
     networks:
-      - sofroute-network
+      - softroute-network
 
   api-gateway:
     build: ./api-gateway
     container_name: api-gateway
+    restart: always
     ports:
       - "8080:8080"
     depends_on:
       service-registry:
         condition: service_healthy
     networks:
-      - sofroute-network
+      - softroute-network
+
+  config-service:
+    build: ./config-service
+    container_name: config-service
+    restart: always
+    ports:
+      - "8888:8888"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8888/healthy/default" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - softroute-network
+    environment:
+      GIT_REPOSITORY_URL: ${GIT_REPOSITORY_URL}
+      GIT_USER: ${GIT_USER}
+      GIT_ACCESS_TOKEN: ${GIT_ACCESS_TOKEN}
+      GIT_BRANCH: {GIT_BRANCH}
 
 
 volumes:
@@ -31,5 +54,5 @@ volumes:
 
 
 networks:
-  sofroute-network:
+  softroute-network:
     driver: bridge
