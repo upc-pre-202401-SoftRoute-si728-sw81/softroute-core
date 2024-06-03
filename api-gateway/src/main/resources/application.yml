@@ -33,7 +33,7 @@ eureka:
   instance:
     hostname: localhost
   client:
-    service-url:
-      default-zone: http://service-registry:8761/eureka/
     fetch-registry: true
     register-with-eureka: true
+    service-url:
+      defaultZone: http://service-registry:8761/eureka
