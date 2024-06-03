@@ -1,4 +1,33 @@
 services:
+  mysqldb:
+    image: mysql:8.0
+    container_name: mysqldb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE_SCHEMA}
+      MYSQL_USER: {DATABASE_USERNAME}
+      MYSQL_PASSWORD: {DATABASE_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - softroute-network
+
+  iam-service:
+    build: ./iam-service
+    container_name: iot-am-service
+    restart: always
+    depends_on:
+      - api-gateway
+    environment:
+      DATABASE_CONECTION_STRING: ${DATABASE_URL}
+      DATABASE_USERNAME: {DATABASE_USERNAME}
+      DATABASE_PASSWORD: {DATABASE_PASSWORD}
+      FLYWAY_SCHEMA: {FLYWAY_DEFAULT_SCHEMA}
+    networks:
+      - softroute-network
 
   service-registry:
     build: ./service-registry
