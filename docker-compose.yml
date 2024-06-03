@@ -17,17 +17,10 @@ services:
 
   iam-service:
     build: ./iam-service
-    container_name: iot-am-service
+    container_name: iam-service
     restart: always
     depends_on:
       - api-gateway
-    environment:
-      DATABASE_CONECTION_STRING: ${DATABASE_URL}
-      DATABASE_USERNAME: ${DATABASE_USERNAME}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-      FLYWAY_SCHEMA: ${FLYWAY_DEFAULT_SCHEMA}
-      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
-      JWT_EXPIRATION_DAYS: ${JWT_EXPIRATION_DAYS}
     networks:
       - softroute-network
 
