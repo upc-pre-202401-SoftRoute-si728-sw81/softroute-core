@@ -1,39 +1,5 @@
 spring:
   application:
     name: api-gateway
-  cloud:
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-      routes:
-        - id: iam-route
-          uri: lb://IAM-SERVICE
-          predicates:
-            - Path=/api/v1/auth/**, /api/v1/users/**
-          filters:
-            - AuthenticationFilter
-        - id: package-route
-          uri: lb://PACKAGE-SERVICE
-          predicates:
-            - Path=/api/v1/packages/**
-          filters:
-            - AuthenticationFilter
-        - id: organization-service
-          uri: lb://ORGANIZATION-SERVICE
-          predicates:
-            - Path=/api/v1/organization/**
-          filters:
-            - AuthenticationFilter
-
-server:
-  port: 8080
-
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://service-registry:8761/eureka
+  config:
+    import: optional:configserver:http://config-service:8888
