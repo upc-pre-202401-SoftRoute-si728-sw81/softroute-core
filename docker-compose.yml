@@ -1,74 +1,10 @@
-version: '3.8'
-
 services:
-  mysql:
-    image: mysql:8.0
-    container_name: mysql-container
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: 12345678
-      MYSQL_DATABASE: deviceservicedb
-      MYSQL_USER: softroute
-      MYSQL_PASSWORD: softroute
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
-
-  rabbitmq:
-    image: rabbitmq:management
-    container_name: rabbitmq-container
-    restart: always
-    environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    volumes:
-      - rabbitmq-data:/var/lib/rabbitmq
-
-  iot-device-service:
-    build: ./iot-device-service
-    container_name: iot-device-service
-    restart: always
-    depends_on:
-      - mysql
-      - rabbitmq
-    environment:
-      DATABASE_CONECTION_STRING: jdbc:mysql://mysql-container:3306/deviceservicedb
-      DATABASE_USERNAME: root
-      DATABASE_PASSWORD: 12345678
-      RABBITMQ_HOST: rabbitmq-container
-      RABBITMQ_PORT: 5672
-      RABBITMQ_USERNAME: guest
-      RABBITMQ_PASSWORD: guest
-    ports:
-      - "8080:8080"
-
   service-registry:
-    image: diegoda04/service-registry:latest
+    build: ./service-registry
     container_name: service-registry
-    restart: always
-
-  tracking-service:
-    build: ./tracking-service
-    container_name: tracking-service
-    restart: always
-    depends_on:
-      - iot-device-service
-    environment:
-      DATABASE_CONECTION_STRING: jdbc:mysql://mysql-container:3306/deviceservicedb
-      DATABASE_USERNAME: root
-      DATABASE_PASSWORD: 12345678
-      RABBITMQ_HOST: rabbitmq-container
-      RABBITMQ_PORT: 5672
-      RABBITMQ_USERNAME: guest
-      RABBITMQ_PASSWORD: guest
-      FLYWAY_SCHEMA: deviceservicedb
     ports:
-      - "8081:8081"
+      - "8761:8761"
+    restart: always
 volumes:
   mysql-data:
-  rabbitmq-data:
 
