@@ -16,7 +16,7 @@ INSERT INTO user (id, first_name, last_name, dni, birth_date, phone_number, comp
     (@LUDWIN_EMPLOYEE_ID, 'Luwin Roy', 'Reyes Suarez','75286934', '2003-08-01 00:00:00', '963258741', @DIEGO_SAC_ID, 'ludwinreyes@gmail.com', '$2a$10$sxC.ZkCA9xnRT407voFtzeNmARPygBw1R0mL6NpoH4K1ngy3LNqtK'); -- luwin1234
 
 INSERT INTO user_roles (user_id, role_id) VALUES
-    (@DIEGO_SAC_ID, 2),
-    (@LENNIN_SAC_ID, 2),
+    (@ADMIN_DIEGO_SAC_ID, 2),
+    (@ADMIN_LENNIN_SAC_ID, 2),
     (@JENNY_EMPLOYEE_ID, 1),
     (@LUDWIN_EMPLOYEE_ID, 1);
