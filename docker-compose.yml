@@ -5,6 +5,13 @@ services:
     ports:
       - "8761:8761"
     restart: always
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - service-registry
 volumes:
   mysql-data:
 
