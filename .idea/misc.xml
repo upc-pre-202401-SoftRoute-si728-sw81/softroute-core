@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/package-service/pom.xml" />
+        <option value="$PROJECT_DIR$/iot-device-service/pom.xml" />
+        <option value="$PROJECT_DIR$/telemetry-service/pom.xml" />
+        <option value="$PROJECT_DIR$/tracking-service/pom.xml" />
+        <option value="$PROJECT_DIR$/iot-data-service/pom.xml" />
+        <option value="$PROJECT_DIR$/iam-service/pom.xml" />
+        <option value="$PROJECT_DIR$/service-registry/pom.xml" />
+        <option value="$PROJECT_DIR$/api-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/organization-service/pom.xml" />
+        <option value="$PROJECT_DIR$/config-service/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/iot-data-service/pom.xml" />
+        <option value="$PROJECT_DIR$/telemetry-service/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_22" default="true" project-jdk-name="openjdk-22" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
