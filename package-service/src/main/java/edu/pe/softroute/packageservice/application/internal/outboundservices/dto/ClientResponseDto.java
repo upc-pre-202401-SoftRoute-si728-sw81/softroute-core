@@ -1,4 +1,4 @@
-package edu.pe.softroute.organizationservice.interfaces.dto;
+package edu.pe.softroute.packageservice.application.internal.outboundservices.dto;
 
 import java.util.UUID;
 import lombok.Builder;
