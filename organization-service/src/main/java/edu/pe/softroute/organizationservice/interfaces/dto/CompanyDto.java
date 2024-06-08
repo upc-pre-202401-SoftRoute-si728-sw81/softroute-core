@@ -6,17 +6,11 @@ import lombok.Data;
 
 @Data
 @Builder
-public class ClientResponseDto {
+public class CompanyDto {
 
   private UUID id;
 
-  private String names;
+  private String name;
 
-  private String surnames;
-
-  private String dni;
-
-  private String email;
-
-  private String phoneNumber;
+  private String ruc;
 }

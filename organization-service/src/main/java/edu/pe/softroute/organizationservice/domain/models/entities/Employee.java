@@ -11,26 +11,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class Client {
+public class Employee {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private UUID id;
 
-  private String names;
-
-  private String surnames;
-
-  private String dni;
-
-  private String email;
-
-  private String phoneNumber;
+  private UUID userId;
 
   @ManyToOne
   private Company company;
