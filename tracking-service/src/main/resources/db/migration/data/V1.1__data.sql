@@ -4,8 +4,8 @@ SET @now = now();
 SET @st1_tracking_code = 'TRK1234';
 
 -- Insertar datos en la tabla tracking
-INSERT INTO tracking (id, tracking_number, status, status_details, status_date, latitude, longitude, timestamp) VALUES
-    (@st1_id, @st1_tracking_code, 'IN_TRANSIT', 'Package is in transit', '2023-05-25 10:00:00', 37.7749, -122.4194, @now);
+INSERT INTO tracking (id, tracking_number, current_step, last_step, encoded_polyline, status, status_date, latitude, longitude, street, district, province, country, timestamp) VALUES
+    (@st1_id, @st1_tracking_code, 0, 148, 'h`{hAn~vtMbD~ENZPz@AJDTJLP@JA\\PbClDjA`BfC|Dn@lAnFtIvChEn@nAVp@^fBFr@Bd@DTr@`WJxDe@t@[Xq@\\o@J_BLyC\\UFqCXsGb@Y@kg@rDqEd@}Jp@}CPuIl@cLx@uHf@QEmBJsEZmAPcBl@gB|@cBr@sA\\w@H{@?mAUk@SeAk@c@c@]}@Ou@@WFQNMPCZ@RFDFTv@TpAJxDFlID~CLpARdAfAlE\\nBRtBLdB\\nC\\`Ed@dIVrDb@jDLvATvDKpBSrACfAD`BP~BJZr@vAVl@Nl@TvAvAtRM^K`AW`AQf@IHAXH~As@A}@DgDZUFcEZ_DZaDF_AHwBd@mAj@iAr@wAtAsAnBm@xAw@hDmAvGW|@_@~@e@r@g@j@{@r@q@`@}@\\s@Jo@D_A?_AMSAUFSNKPCNURe@Ts@Jq@HmDPwKv@qCV_@PMJWb@GZtA|Hl@xCe`@lCcKr@AOsBN','IN_TRANSIT', '2023-05-25 10:00:00', 37.7749, -122.4194, 'Avenida Primavera 2389', 'Santiago de Surco', 'Lima', 'Peru', @now);
 
 INSERT INTO tracking_history (id, status, status_details, status_date, tracking_id) VALUES
     (UUID_TO_BIN('111e4567-e89b-12d3-a456-426614174000'), 'RECEIVED', 'Package has recieved',  @first_day_last_month, @st1_id),

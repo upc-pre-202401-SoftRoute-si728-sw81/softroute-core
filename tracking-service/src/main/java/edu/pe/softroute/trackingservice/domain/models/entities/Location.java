@@ -1,21 +1,20 @@
 package edu.pe.softroute.trackingservice.domain.models.entities;
 
-import jakarta.persistence.Embeddable;
-import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Embeddable
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Builder
-public class Location implements Serializable {
+public class Location  {
+
+  private String street;
+
+  private String district;
+
+  private String province;
+
+  private String country;
 
   private Double latitude;
 

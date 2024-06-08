@@ -1,4 +1,4 @@
-package edu.pe.softroute.iotdeviceservice.infrastructure.google.maps.decoders;
+package edu.pe.softroute.trackingservice.infrastructure.google.maps.decoders;
 
 import java.util.List;
 

@@ -5,6 +5,7 @@ import edu.pe.softroute.trackingservice.domain.models.entities.TrackingHistory;
 import edu.pe.softroute.trackingservice.domain.services.TrackingService;
 import edu.pe.softroute.trackingservice.interfaces.dto.InitTrackingReq;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,10 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/tracking")
+@RequiredArgsConstructor
 public class TrackingController {
 
-  @Autowired
-  TrackingService trackingService;
+  private final TrackingService trackingService;
 
   @PostMapping
   public Tracking initTracking(@RequestBody InitTrackingReq req) {
