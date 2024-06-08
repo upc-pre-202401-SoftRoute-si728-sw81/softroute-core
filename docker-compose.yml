@@ -1,20 +1,4 @@
 services:
-  mysqldb:
-    image: mysql:8.0
-    container_name: mysqldb
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DATABASE_SCHEMA}
-      MYSQL_USER: ${DATABASE_USERNAME}
-      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
-    networks:
-      - softroute-network
-
   rabbitmq:
     image: rabbitmq:management
     container_name: rabbitmq-container
