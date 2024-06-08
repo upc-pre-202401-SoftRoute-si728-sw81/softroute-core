@@ -15,12 +15,63 @@ services:
     networks:
       - softroute-network
 
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq-container
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      - softroute-network
+
   iam-service:
     build: ./iam-service
     container_name: iam-service
     restart: always
     depends_on:
       - api-gateway
+    networks:
+      - softroute-network
+
+  iot-device-service:
+    build: ./iot-device-service
+    container_name: iot-device-service
+    restart: always
+    depends_on:
+      - iam-service
+    networks:
+      - softroute-network
+
+  organization-service:
+    build: ./organization-service
+    container_name: organization-service
+    restart: always
+    depends_on:
+      - iam-service
+    networks:
+      - softroute-network
+
+  package-service:
+    build: ./package-service
+    container_name: package-service
+    restart: always
+    depends_on:
+      - iam-service
+    networks:
+      - softroute-network
+
+  tracking-service:
+    build: ./tracking-service
+    container_name: tracking-service
+    restart: always
+    depends_on:
+      - iam-service
     networks:
       - softroute-network
 
@@ -75,7 +126,7 @@ services:
 
 volumes:
   mysql-data:
-
+    rabbitmq-data:
 
 networks:
   softroute-network:
