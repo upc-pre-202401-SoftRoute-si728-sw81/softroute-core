@@ -126,7 +126,7 @@ services:
 
 volumes:
   mysql-data:
-    rabbitmq-data:
+  rabbitmq-data:
 
 networks:
   softroute-network:
