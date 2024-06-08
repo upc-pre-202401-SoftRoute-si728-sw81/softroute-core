@@ -1,18 +1,3 @@
-server:
-    port: 8080
 spring:
-    application:
-        name: iot-device-service
-    datasource:
-        url: ${DATABASE_CONECTION_STRING}
-        username: ${DATABASE_USERNAME}
-        password: ${DATABASE_PASSWORD}
-    jpa:
-        hibernate:
-            ddl-auto: update
-        show-sql: true
-    rabbitmq:
-        host: ${RABBITMQ_HOST}
-        username: ${RABBITMQ_USERNAME}
-        password: ${RABBITMQ_PASSWORD}
-        port: ${RABBITMQ_PORT}
+    profiles:
+        active: prod

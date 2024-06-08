@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class IotDeviceController {
 
-
   private final IotDeviceService iotDeviceService;
 
   private final IotDataProducer iotDataProducer;

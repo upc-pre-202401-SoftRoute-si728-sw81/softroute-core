@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: iot-device-service
+  config:
+    import: optional:configserver:http://config-service:8888
