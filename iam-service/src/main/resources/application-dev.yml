@@ -1,0 +1,36 @@
+server:
+  port: ${PORT:${SERVER_PORT:0}}
+
+spring:
+  application:
+    name: iam-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/iamdb
+    username: root
+    password: 123456
+  flyway:
+    default-schema: iamdb
+    enabled: true
+    locations: classpath:db/migration/structure, classpath:db/migration/data
+    validate-on-migrate: true
+    baseline-on-migrate: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+authorization:
+  jwt:
+    secret: BuupzrzKJqRxiKek5nrvCu9BRXaRnJ6ShZraKaRzthqQtf0GW4x39Fixr9Da0AuX
+    expiration:
+      days: 7
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
