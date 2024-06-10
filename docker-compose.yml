@@ -1,20 +1,4 @@
-version: '3.8'
-
 services:
-  mysql:
-    image: mysql:8.0
-    container_name: mysql-container
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: 12345678
-      MYSQL_DATABASE: deviceservicedb
-      MYSQL_USER: softroute
-      MYSQL_PASSWORD: softroute
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
-
   rabbitmq:
     image: rabbitmq:management
     container_name: rabbitmq-container
@@ -27,48 +11,107 @@ services:
       - "15672:15672"
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      - softroute-network
+
+  iam-service:
+    build: ./iam-service
+    container_name: iam-service
+    restart: always
+    depends_on:
+      - api-gateway
+    networks:
+      - softroute-network
 
   iot-device-service:
     build: ./iot-device-service
     container_name: iot-device-service
     restart: always
     depends_on:
-      - mysql
-      - rabbitmq
-    environment:
-      DATABASE_CONECTION_STRING: jdbc:mysql://mysql-container:3306/deviceservicedb
-      DATABASE_USERNAME: root
-      DATABASE_PASSWORD: 12345678
-      RABBITMQ_HOST: rabbitmq-container
-      RABBITMQ_PORT: 5672
-      RABBITMQ_USERNAME: guest
-      RABBITMQ_PASSWORD: guest
-    ports:
-      - "8080:8080"
+      - iam-service
+    networks:
+      - softroute-network
 
-  service-registry:
-    image: diegoda04/service-registry:latest
-    container_name: service-registry
+  organization-service:
+    build: ./organization-service
+    container_name: organization-service
     restart: always
+    depends_on:
+      - iam-service
+    networks:
+      - softroute-network
+
+  package-service:
+    build: ./package-service
+    container_name: package-service
+    restart: always
+    depends_on:
+      - iam-service
+    networks:
+      - softroute-network
 
   tracking-service:
     build: ./tracking-service
     container_name: tracking-service
     restart: always
     depends_on:
-      - iot-device-service
-    environment:
-      DATABASE_CONECTION_STRING: jdbc:mysql://mysql-container:3306/deviceservicedb
-      DATABASE_USERNAME: root
-      DATABASE_PASSWORD: 12345678
-      RABBITMQ_HOST: rabbitmq-container
-      RABBITMQ_PORT: 5672
-      RABBITMQ_USERNAME: guest
-      RABBITMQ_PASSWORD: guest
-      FLYWAY_SCHEMA: deviceservicedb
+      - iam-service
+    networks:
+      - softroute-network
+
+  service-registry:
+    build: ./service-registry
+    container_name: service-registry
     ports:
-      - "8081:8081"
+      - "8761:8761"
+    restart: always
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8761" ]
+      interval: 20s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      config-service:
+        condition: service_healthy
+    networks:
+      - softroute-network
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      service-registry:
+        condition: service_healthy
+    networks:
+      - softroute-network
+
+  config-service:
+    build: ./config-service
+    container_name: config-service
+    restart: always
+    ports:
+      - "8888:8888"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8888/healthy/default" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - softroute-network
+    environment:
+      GIT_REPOSITORY_URL: ${GIT_REPOSITORY_URL}
+      GIT_USER: ${GIT_USER}
+      GIT_ACCESS_TOKEN: ${GIT_ACCESS_TOKEN}
+      GIT_BRANCH: ${GIT_BRANCH}
+
+
 volumes:
   mysql-data:
   rabbitmq-data:
 
+networks:
+  softroute-network:
+    driver: bridge

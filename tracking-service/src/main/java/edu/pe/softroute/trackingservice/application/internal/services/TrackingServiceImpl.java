@@ -61,7 +61,12 @@ public class TrackingServiceImpl implements TrackingService {
 
     Tracking tracking = trackingRepository.findByTrackingNumber(trackingNumber);
 
-    tracking.setLocation(location);
+    tracking.setLatitude(location.getLatitude());
+    tracking.setLongitude(location.getLongitude());
+    tracking.setStreet(location.getStreet());
+    tracking.setDistrict(location.getDistrict());
+    tracking.setProvince(location.getProvince());
+    tracking.setCountry(location.getCountry());
 
     return trackingRepository.save(tracking);
   }

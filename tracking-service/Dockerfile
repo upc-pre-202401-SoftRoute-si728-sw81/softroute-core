@@ -1,7 +1,6 @@
 FROM openjdk:17-jdk-alpine
 LABEL authors="diego"
 RUN apk --no-cache add curl maven
-EXPOSE 8081
 WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:resolve
