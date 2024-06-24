@@ -49,7 +49,7 @@ services:
     container_name: organization-service
     restart: always
     depends_on:
-      - iam-service
+      - iot-device-service
     networks:
       - softroute-network
 
@@ -111,7 +111,6 @@ services:
       GIT_USER: ${GIT_USER}
       GIT_ACCESS_TOKEN: ${GIT_ACCESS_TOKEN}
       GIT_BRANCH: ${GIT_BRANCH}
-
 
 volumes:
   mysql-data:
