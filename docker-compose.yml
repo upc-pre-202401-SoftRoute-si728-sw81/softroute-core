@@ -19,7 +19,7 @@ services:
     container_name: iam-service
     restart: always
     depends_on:
-      - api-gateway
+      - service-registry
     networks:
       - softroute-network
 
@@ -60,7 +60,7 @@ services:
     environment:
       GOOGLE_MAPS_API_KEY: YOUR-API-KEY
     depends_on:
-      - iam-service
+      - iot-device-service
     networks:
       - softroute-network
 
