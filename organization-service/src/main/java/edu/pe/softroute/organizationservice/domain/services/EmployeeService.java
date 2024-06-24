@@ -6,5 +6,7 @@ import java.util.UUID;
 
 public interface EmployeeService {
 
-  List<Employee> findAllByCompanyId(UUID companyId);
+  List<Employee> getAllByCompanyId(UUID companyId);
+
+  Employee getById(UUID id);
 }

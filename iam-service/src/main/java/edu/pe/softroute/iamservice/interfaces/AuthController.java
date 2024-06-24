@@ -6,9 +6,9 @@ import edu.pe.softroute.iamservice.infrastructure.jwt.models.JwtInfoDto;
 import edu.pe.softroute.iamservice.interfaces.dto.AuthenticatedUserDto;
 import edu.pe.softroute.iamservice.interfaces.dto.SignInRequest;
 import edu.pe.softroute.iamservice.interfaces.dto.SignUpRequest;
-import edu.pe.softroute.iamservice.interfaces.dto.UserDto;
+import edu.pe.softroute.iamservice.interfaces.dto.UserResponseDto;
 import edu.pe.softroute.iamservice.interfaces.transform.AuthenticatedUserDtoFromEntityAssembler;
-import edu.pe.softroute.iamservice.interfaces.transform.UserDtoFromEntityAssembler;
+import edu.pe.softroute.iamservice.interfaces.transform.UserResponseDtoAssembler;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -29,10 +29,10 @@ public class AuthController   {
   private final AuthService authService;
 
   @PostMapping("/sign-up")
-  public ResponseEntity<UserDto> signUp(@Valid @RequestBody SignUpRequest request) {
-    UserDto userDto = UserDtoFromEntityAssembler.toDtoFromEntity(authService.signUp(request));
+  public ResponseEntity<UserResponseDto> signUp(@Valid @RequestBody SignUpRequest request) {
+    UserResponseDto userResponseDto = UserResponseDtoAssembler.assemble(authService.signUp(request));
 
-    return new ResponseEntity<>(userDto, HttpStatus.CREATED);
+    return new ResponseEntity<>(userResponseDto, HttpStatus.CREATED);
   }
 
   @PostMapping("/sign-in")

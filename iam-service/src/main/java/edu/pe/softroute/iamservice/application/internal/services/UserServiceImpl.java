@@ -22,6 +22,16 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  public User getById(UUID id) {
+    return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id.toString()));
+  }
+
+  @Override
+  public List<User> getAllUsersByCompanyId(UUID companyId) {
+    return userRepository.findAllByCompanyId(companyId);
+  }
+
+  @Override
   public List<User> findAllByIds(List<UUID> ids) {
     return userRepository.findAllById(ids);
   }

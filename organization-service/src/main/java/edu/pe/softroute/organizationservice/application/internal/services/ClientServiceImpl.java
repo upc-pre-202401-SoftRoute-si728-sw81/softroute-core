@@ -1,6 +1,6 @@
 package edu.pe.softroute.organizationservice.application.internal.services;
 
-import edu.pe.softroute.organizationservice.domain.ClientNotFoundException;
+import edu.pe.softroute.organizationservice.domain.exceptions.ClientNotFoundException;
 import edu.pe.softroute.organizationservice.domain.models.entities.Client;
 import edu.pe.softroute.organizationservice.domain.services.ClientService;
 import edu.pe.softroute.organizationservice.infrastructure.persistence.jpa.repositories.ClientRepository;

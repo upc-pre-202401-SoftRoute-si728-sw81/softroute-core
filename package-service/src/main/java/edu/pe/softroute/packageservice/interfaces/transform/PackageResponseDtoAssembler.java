@@ -13,7 +13,12 @@ public class PackageResponseDtoAssembler {
   public static PackageResponseDto assemble(Package resource, ClientResponseDto client) {
     return PackageResponseDto.builder()
         .id(resource.getId())
+        .code(resource.getCode())
+        .humidity(resource.getHumidity())
+        .temperature(resource.getTemperature())
         .description(resource.getDescription())
+        .createdAt(resource.getCreatedAt())
+        .destinationAddress(resource.getDestinationAddress())
         .status(resource.getStatus())
         .details(PackageDetails.builder()
             .height(resource.getHeight())
@@ -31,7 +36,26 @@ public class PackageResponseDtoAssembler {
         .build();
   }
 
+  public static PackageResponseDto assemble(Package resource) {
+    return PackageResponseDto.builder()
+        .id(resource.getId())
+        .code(resource.getCode())
+        .humidity(resource.getHumidity())
+        .temperature(resource.getTemperature())
+        .destinationAddress(resource.getDestinationAddress())
+        .createdAt(resource.getCreatedAt())
+        .description(resource.getDescription())
+        .status(resource.getStatus())
+        .details(PackageDetails.builder()
+            .height(resource.getHeight())
+            .weight(resource.getWeight())
+            .length(resource.getLength())
+            .width(resource.getWidth())
+            .build())
+        .build();
+  }
+
   public static List<PackageResponseDto> assemble(List<Package> resource, Map<UUID, ClientResponseDto> clients) {
-    return resource.stream().map(r -> assemble(r, clients.get(r.getOwnerId()))).toList();
+    return resource.stream().map(r -> assemble(r, clients.get(r.getCustomerId()))).toList();
   }
 }

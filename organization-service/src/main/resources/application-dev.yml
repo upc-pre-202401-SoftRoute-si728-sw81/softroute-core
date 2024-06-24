@@ -26,4 +26,4 @@ eureka:
 
 
 server:
-  port: ${PORT:${SERVER_PORT:0}}
+  port: 8083
