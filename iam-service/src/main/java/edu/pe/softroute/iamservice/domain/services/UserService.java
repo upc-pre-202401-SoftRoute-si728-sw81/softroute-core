@@ -8,6 +8,10 @@ public interface UserService {
 
   User findByEmail(String email);
 
+  User getById(UUID id);
+
+  List<User> getAllUsersByCompanyId(UUID companyId);
+
   List<User> findAllByIds(List<UUID> ids);
 
   User assignCompany(UUID id, UUID companyId);

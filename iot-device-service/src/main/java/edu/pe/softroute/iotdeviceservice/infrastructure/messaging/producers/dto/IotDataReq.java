@@ -9,12 +9,15 @@ import lombok.Setter;
 public class IotDataReq {
 
   @NotNull
-  private String trackingNumber;
+  private String shipmentCode;
 
   @NotNull
-  private Double latitude;
+  private String packageCode;
 
   @NotNull
-  private Double longitude;
+  private Double humidity;
+
+  @NotNull
+  private Double temperature;
 
 }

@@ -33,7 +33,7 @@ public class CompanyServiceImpl implements CompanyService {
 
   @Override
   public List<Employee> getAllEmployeesByCompanyId(UUID id) {
-    return employeeService.findAllByCompanyId(id);
+    return employeeService.getAllByCompanyId(id);
   }
 
 }

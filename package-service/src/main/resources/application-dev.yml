@@ -2,7 +2,7 @@ spring:
   application:
     name: package-service
   datasource:
-    url: jdbc:mysql://localhost:3306/packagedb
+    url: jdbc:mysql://localhost:3306/packagedb?useSSL=false&serverTimezone=America/Lima
     username: root
     password: 123456
   flyway:
@@ -13,7 +13,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-
+  rabbitmq:
+    host: localhost
+    username: guest
+    password: guest
+    port: 5672
 
 eureka:
   client:
@@ -27,4 +31,10 @@ eureka:
 
 
 server:
-  port: ${PORT:${SERVER_PORT:0}}
+  port: 8084
+
+
+google:
+  maps:
+    api:
+      key: ${GOOGLE_MAPS_API_KEY}
