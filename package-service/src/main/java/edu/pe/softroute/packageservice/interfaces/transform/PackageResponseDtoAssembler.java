@@ -13,6 +13,7 @@ public class PackageResponseDtoAssembler {
   public static PackageResponseDto assemble(Package resource, ClientResponseDto client) {
     return PackageResponseDto.builder()
         .id(resource.getId())
+        .shipmentCode(resource.getShipment().getCode())
         .code(resource.getCode())
         .humidity(resource.getHumidity())
         .temperature(resource.getTemperature())

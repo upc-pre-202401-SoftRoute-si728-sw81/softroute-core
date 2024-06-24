@@ -16,6 +16,8 @@ public class PackageResponseDto {
 
   private UUID id;
 
+  private String shipmentCode;
+
   private String code;
 
   private Double humidity;
