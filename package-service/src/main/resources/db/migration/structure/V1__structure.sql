@@ -1,14 +1,51 @@
+CREATE TABLE shipment (
+    id BINARY(16) NOT NULL,
+    code VARCHAR(7) NOT NULL,
+    encoded_polyline TEXT NULL,
+    current_step INT NULL,
+    last_step INT NULL,
+    address VARCHAR(120) NULL,
+    latitude DOUBLE NULL,
+    longitude DOUBLE NULL,
+    timestamp TIMESTAMP NULL,
+    start_date DATETIME NULL,
+    carrier_id BINARY(16) NOT NULL,
+    packages_delivered INT NOT NULL,
+    num_packages INT NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    company_id BINARY(16) NOT NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NULL,
+    PRIMARY KEY (id)
+);
+
 -- TABLE - PACKAGES
 CREATE TABLE package (
     id BINARY(16) NOT NULL,
-    owner_id BINARY(16) NOT NULL,
+    code VARCHAR(5) NOT NULL,
+    created_at DATETIME NULL,
+    shipment_id BINARY(16) NULL,
+    customer_id BINARY(16) NOT NULL,
     tracking_id BINARY(16) NULL,
     company_id BINARY(16) NOT NULL,
     description TEXT,
+    break_condition BOOLEAN NOT NULL,
+    min_humidity DOUBLE NOT NULL,
+    max_humidity DOUBLE NOT NULL,
+    min_temperature DOUBLE NOT NULL,
+    max_temperature DOUBLE NOT NULL,
+    humidity DOUBLE NOT NULL,
+    temperature DOUBLE NOT NULL,
     weight DOUBLE NOT NULL,
     height DOUBLE NOT NULL,
     width DOUBLE NOT NULL,
     length DOUBLE NOT NULL,
+    destination_address VARCHAR(120) NOT NULL,
+    latitude DOUBLE NULL,
+    longitude DOUBLE NULL,
+    timestamp TIMESTAMP NULL,
     status VARCHAR(20) NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    CONSTRAINT fk_shipment FOREIGN KEY (shipment_id) REFERENCES shipment(id)
 );
+

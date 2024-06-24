@@ -31,5 +31,22 @@ public class PackageReq {
   private Double length;
 
   @NotNull
-  private UUID ownerId;
+  private Double minTemperature;
+
+  @NotNull
+  private Double maxTemperature;
+
+  @NotNull
+  @Positive
+  private Double minHumidity;
+
+  @NotNull
+  @Positive
+  private Double maxHumidity;
+
+  @NotNull
+  private String destinationAddress;
+
+  @NotNull
+  private UUID customerId;
 }

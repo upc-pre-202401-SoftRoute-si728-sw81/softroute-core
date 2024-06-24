@@ -16,6 +16,5 @@ INSERT INTO employee (id, user_id, company_id) VALUES
 
 -- CLIENTS
 INSERT INTO client (id, names, surnames, dni, email, phone_number, company_id) VALUES
-    (UUID_TO_BIN('444e3456-e89b-12d3-a456-426614174000'), 'Juan Carlos', 'Rivera Gonzales', '65745467', 'juancarlos@gmail.com', '945845612', @DIEGO_SAC_ID),
-    (UUID_TO_BIN('444e3456-e89b-12d3-a456-426614174001'), 'Rosa Marinela', 'Garcia Vasquez', '76859871', 'rosamarinela@gmail.com', '985621741', @DIEGO_SAC_ID);
-
+    (UUID_TO_BIN('444e3456-e89b-12d3-a456-426614174000'), 'Jenny Aremy', 'Balceda Calixto', '65745467', 'jennybalcedacalixto01@gmail.com', '945845612', @DIEGO_SAC_ID),
+    (UUID_TO_BIN('444e3456-e89b-12d3-a456-426614174001'), 'Diego Antonio', 'De la Cruz Arellano', '76859871', 'diego04s03@gmail.com', '985621741', @DIEGO_SAC_ID);

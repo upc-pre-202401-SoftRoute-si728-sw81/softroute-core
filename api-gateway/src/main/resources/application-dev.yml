@@ -19,27 +19,27 @@ spring:
         - id: package-route
           uri: lb://PACKAGE-SERVICE
           predicates:
-            - Path=/api/v1/packages/**
+            - Path=/api/v1/packages/**, /api/v1/shipments/**, /ws/**
           filters:
             - AuthenticationFilter
         - id: organization-service
           uri: lb://ORGANIZATION-SERVICE
           predicates:
-            - Path=/api/v1/organization/**
-          filters:
-            - AuthenticationFilter
-        - id: tracking-service
-          uri: lb://TRACKING-SERVICE
-          predicates:
-            - Path=/api/v1/tracking/**
+            - Path=/api/v1/clients/**, /api/v1/employees
           filters:
             - AuthenticationFilter
         - id: iot-device-service
           uri: lb://IOT-DEVICE-SERVICE
           predicates:
             - Path=/api/v1/iot-devices/**
+        - id: notification-route
+          uri: lb://NOTIFICATION-SERVICE
+          predicates:
+            - Path=/api/v1/notifications/**
+          filters:
+            - AuthenticationFilter
       default-filters:
-        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin, RETAIN_FIRST
       globalcors:
         corsConfigurations:
           '[/**]':
