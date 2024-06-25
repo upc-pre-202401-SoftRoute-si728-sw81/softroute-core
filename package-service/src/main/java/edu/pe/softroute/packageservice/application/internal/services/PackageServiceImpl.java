@@ -82,31 +82,13 @@ public class PackageServiceImpl implements PackageService {
     if (!breakCondition) {
       temperature += (random.nextBoolean() ? 1 : -1) * tempChange;
       humidity += (random.nextBoolean() ? 1 : -1) * humidityChange;
-
-      if (temperature < minTemperature) temperature = minTemperature;
-      if (temperature > maxTemperature) temperature = maxTemperature;
-      if (humidity < minHumidity) humidity = minHumidity;
-      if (humidity > maxHumidity) humidity = maxHumidity;
     } else {
-      if (temperature >= minTemperature && temperature <= maxTemperature) {
-        temperature += (temperature > (minTemperature + maxTemperature) / 2) ? tempChange + 5 : -tempChange - 5;
-      } else {
-        temperature += (temperature < minTemperature) ? -tempChange : tempChange;
-      }
-
-      if (humidity >= minHumidity && humidity <= maxHumidity) {
-        humidity += (humidity > (minHumidity + maxHumidity) / 2) ? humidityChange + 5 : -humidityChange - 5;
-      } else {
-        humidity += (humidity < minHumidity) ? -humidityChange : humidityChange;
-      }
-
-      if (temperature >= minTemperature && temperature <= maxTemperature) {
-        temperature = temperature > (minTemperature + maxTemperature) / 2 ? maxTemperature + 5 + random.nextDouble() * 5 : minTemperature - 5 - random.nextDouble() * 5;
-      }
-      if (humidity >= minHumidity && humidity <= maxHumidity) {
-        humidity = humidity > (minHumidity + maxHumidity) / 2 ? maxHumidity + 5 + random.nextDouble() * 5 : minHumidity - 5 - random.nextDouble() * 5;
-      }
+      temperature += (random.nextBoolean() ? 1 : -1) * (tempChange + 5);
+      humidity += (random.nextBoolean() ? 1 : -1) * (humidityChange + 5);
     }
+
+    temperature = Math.min(Math.max(temperature, minTemperature), maxTemperature);
+    humidity = Math.min(Math.max(humidity, minHumidity), maxHumidity);
 
     packageToUpdate.setTemperature(temperature);
     packageToUpdate.setHumidity(humidity);
