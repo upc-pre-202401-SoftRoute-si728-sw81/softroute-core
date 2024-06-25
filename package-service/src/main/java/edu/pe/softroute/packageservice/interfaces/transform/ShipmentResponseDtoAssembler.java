@@ -47,6 +47,7 @@ public class ShipmentResponseDtoAssembler {
         .id(resource.getId())
         .code(resource.getCode())
         .location(Location.builder()
+            .address(resource.getAddress())
             .latitude(resource.getLatitude())
             .longitude(resource.getLongitude())
             .timestamp(resource.getTimestamp())
