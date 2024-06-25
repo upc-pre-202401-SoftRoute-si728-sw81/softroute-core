@@ -18,6 +18,8 @@ public class PackageResponseDto {
 
   private String shipmentCode;
 
+  private Boolean breakCondition;
+
   private String code;
 
   private Double humidity;

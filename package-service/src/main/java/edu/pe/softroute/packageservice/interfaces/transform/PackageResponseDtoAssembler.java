@@ -18,6 +18,7 @@ public class PackageResponseDtoAssembler {
         .id(resource.getId())
         .shipmentCode(shipment == null ? null : shipment.getCode())
         .code(resource.getCode())
+        .breakCondition(resource.getBreakCondition())
         .humidity(resource.getHumidity())
         .temperature(resource.getTemperature())
         .description(resource.getDescription())
