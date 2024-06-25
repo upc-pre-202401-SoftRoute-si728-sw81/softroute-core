@@ -119,7 +119,7 @@ public class ShipmentServiceImpl implements ShipmentService {
     }
 
     final double NEAR_THRESHOLD = 1.0; // 1 kilómetro
-    final double DELIVERED_THRESHOLD = 0.03; // 30 metros
+    final double DELIVERED_THRESHOLD = 0.05; // 30 metros
 
     List<Package> packages = shipment.getPackages();
 

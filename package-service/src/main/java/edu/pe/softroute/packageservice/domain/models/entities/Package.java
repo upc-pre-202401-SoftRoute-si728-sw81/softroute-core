@@ -74,4 +74,8 @@ public class Package {
 
   @ManyToOne
   private Shipment shipment;
+
+  public void switchBreakCondition() {
+    this.breakCondition = !this.breakCondition;
+  }
 }

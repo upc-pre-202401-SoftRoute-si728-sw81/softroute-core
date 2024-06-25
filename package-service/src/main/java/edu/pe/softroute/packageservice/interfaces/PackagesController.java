@@ -76,5 +76,8 @@ public class PackagesController {
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
-
+  @PutMapping("{code}/break")
+  public void breakPackage(@PathVariable String code) {
+    packageService.switchBreakCondition(code);
+  }
 }

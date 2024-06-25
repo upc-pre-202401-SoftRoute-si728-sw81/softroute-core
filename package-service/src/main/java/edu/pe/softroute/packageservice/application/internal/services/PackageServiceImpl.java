@@ -120,6 +120,15 @@ public class PackageServiceImpl implements PackageService {
   }
 
   @Override
+  public void switchBreakCondition(String packageCode) {
+    Package packageTo = packageRepository.findByCode(packageCode);
+
+    packageTo.switchBreakCondition();
+
+    packageRepository.save(packageTo);
+  }
+
+  @Override
   public Package getById(UUID id) {
     return packageRepository.findById(id)
         .orElseThrow(() -> new PackageNotFoundException(id));

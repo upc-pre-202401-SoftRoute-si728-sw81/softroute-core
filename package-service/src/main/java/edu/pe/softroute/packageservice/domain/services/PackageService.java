@@ -23,4 +23,6 @@ public interface PackageService {
   Package updateTemperatureAndHumidity(String code, Double humidityFrom, Double temperatureFrom);
 
   List<Package> getPackagesByStatus(UUID companyID, PackageStatus status);
+
+  void switchBreakCondition(String packageCode);
 }
