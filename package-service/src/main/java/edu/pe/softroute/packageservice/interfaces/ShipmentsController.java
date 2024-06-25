@@ -40,7 +40,7 @@ public class ShipmentsController {
 
   @GetMapping
   public ResponseEntity<List<ShipmentResponseDto>> getAllShipments(@RequestHeader String companyId) {
-    List<Shipment> shipments = shipmentService.getAll(UUID.fromString(companyId));
+    List<Shipment> shipments = shipmentService.getAll();
     List<UUID> ids = shipments.stream().map(Shipment::getCarrierId).toList();
     List<EmployeeResponseDto> employeeResponse = externalEmployeeService.getAllEmployees(companyId).stream().filter(e -> ids.contains(e.getId())).toList();
     Map<UUID, EmployeeResponseDto> resourceMap = employeeResponse.stream().collect(Collectors.toMap(EmployeeResponseDto::getId, c -> c));

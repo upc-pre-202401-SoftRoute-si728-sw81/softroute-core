@@ -10,7 +10,7 @@ public interface ShipmentService {
 
   Shipment create(UUID companyId, ShipmentReq req);
 
-  List<Shipment> getAll(UUID companyId);
+  List<Shipment> getAll();
 
   Shipment getById(UUID id);
 

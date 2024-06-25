@@ -60,10 +60,8 @@ public class ShipmentServiceImpl implements ShipmentService {
   }
 
   @Override
-  public List<Shipment> getAll(UUID companyId) {
-    List<Shipment> shipments = shipmentRepository.findAll(Sort.by(Direction.DESC, "createdAt"));
-
-    return shipments.stream().filter( s -> s.getCompanyId() == companyId).toList();
+  public List<Shipment> getAll() {
+    return shipmentRepository.findAll(Sort.by(Direction.DESC, "createdAt"));
   }
 
   @Override
