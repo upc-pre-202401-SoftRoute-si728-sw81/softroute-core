@@ -73,18 +73,18 @@ public class PackageServiceImpl implements PackageService {
     double maxHumidity = packageToUpdate.getMaxHumidity();
 
     Random random = new Random();
-    double tempChange = 0.5 + (1.5 - 0.5) * random.nextDouble();
-    double humidityChange = 0.5 + (1.5 - 0.5) * random.nextDouble();
+    double tempChange = 0.1 + (1.0 - 0.1) * random.nextDouble();  // Cambios más pequeños y precisos
+    double humidityChange = 0.1 + (1.0 - 0.1) * random.nextDouble();
 
     double temperature = packageToUpdate.getTemperature();
     double humidity = packageToUpdate.getHumidity();
 
     if (!breakCondition) {
-      temperature += (random.nextBoolean() ? 1 : -1) * tempChange;
-      humidity += (random.nextBoolean() ? 1 : -1) * humidityChange;
+      temperature += (random.nextBoolean() ? tempChange : -tempChange);
+      humidity += (random.nextBoolean() ? humidityChange : -humidityChange);
     } else {
-      temperature += (random.nextBoolean() ? 1 : -1) * (tempChange + 5);
-      humidity += (random.nextBoolean() ? 1 : -1) * (humidityChange + 5);
+      temperature += (random.nextBoolean() ? tempChange + 2 : -tempChange - 2);
+      humidity += (random.nextBoolean() ? humidityChange + 2 : -humidityChange - 2);
     }
 
     temperature = Math.min(Math.max(temperature, minTemperature), maxTemperature);
