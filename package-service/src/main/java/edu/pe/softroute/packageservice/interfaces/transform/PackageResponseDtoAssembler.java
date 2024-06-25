@@ -46,6 +46,7 @@ public class PackageResponseDtoAssembler {
         .id(resource.getId())
         .code(resource.getCode())
         .humidity(resource.getHumidity())
+        .breakCondition(resource.getBreakCondition())
         .temperature(resource.getTemperature())
         .destinationAddress(resource.getDestinationAddress())
         .createdAt(resource.getCreatedAt())
