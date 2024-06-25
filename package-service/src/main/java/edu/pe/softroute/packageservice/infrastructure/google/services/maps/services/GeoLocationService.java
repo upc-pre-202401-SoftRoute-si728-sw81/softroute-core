@@ -27,8 +27,10 @@ public class GeoLocationService {
     try {
       String response = restTemplate.getForObject(url, String.class);
       JsonNode jsonNode = objectMapper.readTree(response);
+      System.out.println(url);
       System.out.println(response);
       System.out.println(apiKey);
+      System.out.println(addressTo);
 
       if (jsonNode.has("results") && jsonNode.get("results").size() > 0) {
         JsonNode result = jsonNode.get("results").get(0);
