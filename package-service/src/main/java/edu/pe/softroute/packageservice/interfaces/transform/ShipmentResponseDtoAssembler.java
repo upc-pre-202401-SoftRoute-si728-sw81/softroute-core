@@ -37,6 +37,7 @@ public class ShipmentResponseDtoAssembler {
             .phoneNumber(employee.getPhoneNumber())
             .build())
         .numPackages(resource.getNumPackages())
+        .packagesDelivered(resource.getPackagesDelivered())
         .status(resource.getStatus())
         .build();
   }
@@ -51,6 +52,7 @@ public class ShipmentResponseDtoAssembler {
             .timestamp(resource.getTimestamp())
             .build())
         .numPackages(resource.getNumPackages())
+        .packagesDelivered(resource.getPackagesDelivered())
         .status(resource.getStatus())
         .build();
   }

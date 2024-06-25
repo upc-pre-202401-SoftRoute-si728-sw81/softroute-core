@@ -25,6 +25,8 @@ public class ShipmentResponseDto {
 
   private int numPackages;
 
+  private Integer packagesDelivered;
+
   private Location location;
 
   private List<Point> destinations;

@@ -10,7 +10,7 @@ public interface ShipmentService {
 
   Shipment create(UUID companyId, ShipmentReq req);
 
-  List<Shipment> getAll();
+  List<Shipment> getAll(UUID companyId);
 
   Shipment getById(UUID id);
 
@@ -21,5 +21,4 @@ public interface ShipmentService {
   String checkoutPackageDelivered(String shipmentCode);
 
   Shipment move(String shipmentCode, Double lat, Double lng);
-
 }
