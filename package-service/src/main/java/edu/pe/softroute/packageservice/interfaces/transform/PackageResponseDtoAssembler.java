@@ -4,6 +4,7 @@ import edu.pe.softroute.packageservice.application.internal.outboundservices.dto
 import edu.pe.softroute.packageservice.domain.models.entities.Package;
 import edu.pe.softroute.packageservice.domain.models.entities.PackageDetails;
 import edu.pe.softroute.packageservice.domain.models.entities.PackageOwner;
+import edu.pe.softroute.packageservice.domain.models.entities.Shipment;
 import edu.pe.softroute.packageservice.interfaces.dto.PackageResponseDto;
 import java.util.List;
 import java.util.Map;
@@ -11,9 +12,11 @@ import java.util.UUID;
 
 public class PackageResponseDtoAssembler {
   public static PackageResponseDto assemble(Package resource, ClientResponseDto client) {
+    Shipment shipment = resource.getShipment();
+
     return PackageResponseDto.builder()
         .id(resource.getId())
-        .shipmentCode(resource.getShipment().getCode())
+        .shipmentCode(shipment == null ? null : shipment.getCode())
         .code(resource.getCode())
         .humidity(resource.getHumidity())
         .temperature(resource.getTemperature())
