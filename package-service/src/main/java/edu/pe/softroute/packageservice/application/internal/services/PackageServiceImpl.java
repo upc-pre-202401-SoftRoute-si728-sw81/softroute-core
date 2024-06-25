@@ -73,22 +73,40 @@ public class PackageServiceImpl implements PackageService {
     double maxHumidity = packageToUpdate.getMaxHumidity();
 
     Random random = new Random();
-    double tempChange = 0.1 + (1.0 - 0.1) * random.nextDouble();  // Cambios más pequeños y precisos
-    double humidityChange = 0.1 + (1.0 - 0.1) * random.nextDouble();
+    double tempChange = 0.5 + (1.5 - 0.5) * random.nextDouble();
+    double humidityChange = 0.5 + (1.5 - 0.5) * random.nextDouble();
 
     double temperature = packageToUpdate.getTemperature();
     double humidity = packageToUpdate.getHumidity();
 
     if (!breakCondition) {
-      temperature += (random.nextBoolean() ? tempChange : -tempChange);
-      humidity += (random.nextBoolean() ? humidityChange : -humidityChange);
-    } else {
-      temperature += (random.nextBoolean() ? tempChange + 2 : -tempChange - 2);
-      humidity += (random.nextBoolean() ? humidityChange + 2 : -humidityChange - 2);
-    }
+      temperature += (random.nextBoolean() ? 1 : -1) * tempChange;
+      humidity += (random.nextBoolean() ? 1 : -1) * humidityChange;
 
-    temperature = Math.min(Math.max(temperature, minTemperature), maxTemperature);
-    humidity = Math.min(Math.max(humidity, minHumidity), maxHumidity);
+      if (temperature < minTemperature) temperature = minTemperature;
+      if (temperature > maxTemperature) temperature = maxTemperature;
+      if (humidity < minHumidity) humidity = minHumidity;
+      if (humidity > maxHumidity) humidity = maxHumidity;
+    } else {
+      if (temperature >= minTemperature && temperature <= maxTemperature) {
+        temperature += (temperature > (minTemperature + maxTemperature) / 2) ? tempChange + 3 : -tempChange - 3;
+      } else {
+        temperature += (temperature < minTemperature) ? -tempChange : tempChange;
+      }
+
+      if (humidity >= minHumidity && humidity <= maxHumidity) {
+        humidity += (humidity > (minHumidity + maxHumidity) / 2) ? humidityChange + 3 : -humidityChange - 3;
+      } else {
+        humidity += (humidity < minHumidity) ? -humidityChange : humidityChange;
+      }
+
+      if (temperature >= minTemperature && temperature <= maxTemperature) {
+        temperature = temperature > (minTemperature + maxTemperature) / 2 ? maxTemperature + 3 + random.nextDouble() * 3 : minTemperature - 3 - random.nextDouble() * 3;
+      }
+      if (humidity >= minHumidity && humidity <= maxHumidity) {
+        humidity = humidity > (minHumidity + maxHumidity) / 2 ? maxHumidity + 3 + random.nextDouble() * 3 : minHumidity - 3 - random.nextDouble() * 3;
+      }
+    }
 
     packageToUpdate.setTemperature(temperature);
     packageToUpdate.setHumidity(humidity);
